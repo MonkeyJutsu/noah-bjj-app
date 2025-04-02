@@ -1,113 +1,96 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import { useState } from "react";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const workouts = {
+  day1: {
+    title: "Day 1 – Lower Body Focus",
+    warmup: [
+      "Bodyweight squats x10",
+      "Glute bridges x15",
+      "World’s Greatest Stretch – 1 min per side",
+    ],
+    main: ["Goblet Squat – 4x8 (controlled tempo, work on depth)"],
+    accessory: [
+      "Romanian Deadlift (DB or barbell) – 3x10",
+      "Bulgarian Split Squat – 3x6 per leg",
+      "Wall Sit – 3x30 sec hold",
+      "Plank to Push-Up – 3x10",
+    ],
+    cooldown: [
+      "Deep squat hold – 2x30s",
+      "Hamstring stretch – 1 min per side",
+    ],
+  },
+  day2: {
+    title: "Day 2 – Upper Body + Core",
+    warmup: [
+      "Band pull-aparts x15",
+      "Arm circles + scapula shrugs",
+      "Bird-Dogs – 10 per side",
+    ],
+    main: ["Pull-Ups – 3xMax Reps (or Inverted Rows if needed)"],
+    accessory: [
+      "Push-Ups – 3x10-15",
+      "Dumbbell Row – 3x10 per side",
+      "Suitcase Carry – 3x20 yards per side",
+      "Side Plank – 3x20 sec per side",
+    ],
+    cooldown: [
+      "Chest opener stretch",
+      "Breathing work – 3x deep breaths in child’s pose",
+    ],
+  },
+};
 
 export default function Home() {
+  const [selectedDay, setSelectedDay] = useState("day1");
+  const workout = workouts[selectedDay];
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              pages/index.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="min-h-screen bg-gray-100 p-4 space-y-4 max-w-xl mx-auto">
+      <h1 className="text-2xl font-bold text-center text-gray-800">
+        Noah's BJJ Strength Plan
+      </h1>
+
+      <div className="flex justify-center space-x-2">
+        <button
+          onClick={() => setSelectedDay("day1")}
+          className={`px-4 py-2 rounded ${
+            selectedDay === "day1" ? "bg-blue-600 text-white" : "bg-gray-200"
+          }`}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          Day 1
+        </button>
+        <button
+          onClick={() => setSelectedDay("day2")}
+          className={`px-4 py-2 rounded ${
+            selectedDay === "day2" ? "bg-blue-600 text-white" : "bg-gray-200"
+          }`}
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          Day 2
+        </button>
+      </div>
+
+      <div className="bg-white p-4 rounded shadow space-y-4">
+        <h2 className="text-xl font-semibold">{workout.title}</h2>
+
+        <Section title="Warm-Up" items={workout.warmup} />
+        <Section title="Main Lift" items={workout.main} />
+        <Section title="Accessory Work" items={workout.accessory} />
+        <Section title="Cooldown" items={workout.cooldown} />
+      </div>
+    </div>
+  );
+}
+
+function Section({ title, items }) {
+  return (
+    <div>
+      <h3 className="font-medium text-gray-700 mb-1">{title}</h3>
+      <ul className="list-disc list-inside space-y-1 text-gray-800">
+        {items.map((item, idx) => (
+          <li key={idx}>{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }
